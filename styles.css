@@ -1,0 +1,113 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+    
+}
+#youtubeIcon {
+    width: 3%;
+}
+.paginate {
+    margin-right: 1rem;
+}
+#channeltitle {
+    font-style: italic;
+    margin-top: 0.7rem;
+}
+#videotitle {
+    margin: 0.7rem 0;
+    font-weight: 500;
+    width: 70%;
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+#searchBtn {
+    background-color: #f5f4f4;
+    border: none;
+    color: #a0a0a0;
+}
+#errorMsg {
+    text-align: center;
+}
+iframe {
+    height: 25vh;
+    margin-bottom: 1rem;
+}
+#description {
+    margin-top: 0.7rem;
+}
+.navBar {
+    position: fixed;
+    display: flex;
+    background-color: #222222;
+    color: #FFF;
+}
+@media screen and (min-width: 481px) {
+    #videoListContainer {
+        padding: 5rem 1rem 0 3rem;
+    }
+    iframe {
+        width: 27vw;
+        margin-right: 0.7rem;
+    }
+    .videosarrange {
+        display: flex;
+    }
+    .navBar {
+        padding: 0.5rem 0 0.5rem 3rem;
+    }
+    #keyword-input {
+        border: none;
+        flex: 1;
+        font-size: 1rem;
+        padding: .4rem 2rem .4rem 2rem;
+    }
+    #title {
+        flex: 3;
+        font-size: xx-large;
+        padding-left: 0.5rem;
+    }
+    #searchBtn {
+        margin-right: 2rem;
+        font-size: 1rem;
+        padding: .6rem 2rem .6rem 2rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #videoListContainer {
+        padding: 3rem 0 0 1rem;
+    }
+    #videosArrangement {
+        width: 90vw;
+        display: flex;
+        flex-direction: column;
+    }
+    #title {
+        flex: 1;
+        font-size:large;
+    }
+    #youtubeIcon {
+        width: 7%;
+    }
+    .navBar {
+        padding: 0.5rem 0;
+    }
+    #searchBtn {
+        padding: 0 0.4rem 0 0.4rem;
+    }
+    #keyword-input {
+        border: none;
+        padding: 0;
+    }
+    #description {
+        margin: 0.7rem 0;
+        width: 90%;
+        overflow:hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
