@@ -4,19 +4,36 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Segoe UI", Tahoma, Arial, sans-serif;
-    
 }
-#youtubeIcon {
+
+
+.navBar {
+    position: fixed;
+    display: flex;
+    background-color: #222222;
+    color: #FFF;
+}
+#navBar__youtubeIcon {
     width: 3%;
 }
-.paginate {
-    margin-right: 1rem;
+#navBar__searchBtn {
+    background-color: #f5f4f4;
+    border: none;
+    color: #a0a0a0;
 }
-#channeltitle {
+
+
+iframe {
+    margin: 1rem 0;
+}
+#video-description {
+    margin-top: 0.7rem;
+}
+#channel-title {
     font-style: italic;
     margin-top: 0.7rem;
 }
-#videotitle {
+#video-title {
     margin: 0.7rem 0;
     font-weight: 500;
     width: 70%;
@@ -24,90 +41,146 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-#searchBtn {
-    background-color: #f5f4f4;
-    border: none;
-    color: #a0a0a0;
-}
 #errorMsg {
     text-align: center;
 }
-iframe {
-    height: 25vh;
+
+.pagination {
+    display: inline-block;
     margin-bottom: 1rem;
 }
-#description {
-    margin-top: 0.7rem;
+.paginate {
+    margin-right: 1rem;
+    text-decoration: none;
+    color: #464547;
+    border: 1px solid #000;
+    padding: 0.5rem 2rem;
+    border-radius: 1rem;
 }
-.navBar {
-    position: fixed;
-    display: flex;
-    background-color: #222222;
+.paginate:hover {
+    cursor: pointer;
+    border: 1px solid #000;
+    border-left: none;
+    background-color: #263852;
     color: #FFF;
 }
-@media screen and (min-width: 481px) {
-    #videoListContainer {
-        padding: 5rem 1rem 0 3rem;
-    }
-    iframe {
-        width: 27vw;
-        margin-right: 0.7rem;
-    }
-    .videosarrange {
-        display: flex;
-    }
+
+
+@media screen and (min-width: 751px) {
+
     .navBar {
         padding: 0.5rem 0 0.5rem 3rem;
     }
-    #keyword-input {
+    #navBar__keyword-input {
         border: none;
-        flex: 1;
         font-size: 1rem;
         padding: .4rem 2rem .4rem 2rem;
+        width: 45%;
     }
-    #title {
+    #navBar__title {
         flex: 3;
         font-size: xx-large;
         padding-left: 0.5rem;
     }
-    #searchBtn {
+    #navBar__searchBtn {
         margin-right: 2rem;
         font-size: 1rem;
         padding: .6rem 2rem .6rem 2rem;
     }
+
+
+    #videoListContainer {
+        padding: 5rem 1rem 0 3rem;
+    }
+    .videoListContainer__videosarrange {
+        display: flex;
+    }
+    iframe {
+        width: 20vw;
+        height: 20vh;
+        margin-right: 0.7rem;
+    }
+    
+    
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (min-width: 421px) and (max-width: 750px) {
+
+    #navBar__title {
+        flex: 1;
+    }
+    #navBar__searchBtn {
+        padding: 0 1rem;
+        margin-right: 2rem;
+    }
+    #navBar__youtubeIcon {
+        margin-left: 1rem;
+    }
+    #navBar__keyword-input {
+        border: none;
+        padding: 0 1rem;
+        width: 55%;
+    }
+
+
+    .videoListContainer__videosarrange {
+        display: flex;
+    }
     #videoListContainer {
         padding: 3rem 0 0 1rem;
     }
-    #videosArrangement {
-        width: 90vw;
-        display: flex;
-        flex-direction: column;
+    #video-description {
+        margin: 0.7rem 0;
+        overflow:hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
-    #title {
-        flex: 1;
-        font-size:large;
+    iframe {
+        height: 20vh;
+        margin-right: 1rem;
     }
-    #youtubeIcon {
-        width: 7%;
-    }
+    
+}
+
+@media screen and (max-width: 420px) {
+
     .navBar {
         padding: 0.5rem 0;
     }
-    #searchBtn {
-        padding: 0 0.4rem 0 0.4rem;
+    #navBar__title {
+        flex: 1;
+        font-size:large;
+        margin-top: 0.1rem;
     }
-    #keyword-input {
+    #navBar__youtubeIcon {
+        width: 7%;
+        margin-left: 1rem;
+    }
+    #navBar__searchBtn {
+        padding: 0 0.4rem;
+        margin-right: 1rem;
+    }
+    #navBar__keyword-input {
         border: none;
         padding: 0;
     }
-    #description {
+
+
+    #videoListContainer {
+        padding: 3rem 0 0 1rem;
+    }
+    iframe {
+        width: 90vw;
+        height: 30vh;
+        display: flex;
+        flex-direction: column;
+    }
+    #video-description {
         margin: 0.7rem 0;
         width: 90%;
         overflow:hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
     }
+
 }
