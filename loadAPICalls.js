@@ -27,6 +27,29 @@ searchbtn.addEventListener('click', e => {
   execute();
 })
   
+function getTimeElapsedSinceUpload(date1) {
+    const date2 = Date.now();
+    var daysElapsed = (date2 - date1) / (1000 * 60 * 60 * 24 * 31 * 12);
+    daysElapsed = parseInt(daysElapsed);
+    if (daysElapsed <= 0) {
+      daysElapsed = (date2 - date1) / (1000 * 60 * 60 * 24 * 31);
+      daysElapsed = parseInt(daysElapsed);
+      if (daysElapsed <= 0) {
+        daysElapsed = (date2 - date1) / (1000 * 60 * 60 * 24);
+        daysElapsed = parseInt(daysElapsed);
+        if (daysElapsed <= 0) {
+          daysElapsed = (date2 - date1) / (1000 * 60 * 60);
+          daysElapsed = parseInt(daysElapsed);
+          daysElapsed += " hours ago";
+        } else daysElapsed += " days ago";
+      } else {
+        daysElapsed += " months ago";
+      }
+    } else {
+      daysElapsed += " years ago";
+    }
+    return daysElapsed;
+}
 
 function execute() {
     const searchString = keywordInput.value;
@@ -49,15 +72,15 @@ function execute() {
     .then(function(response) {
         
         const listItems = response.result.items;
-
         if (listItems) {
             let output = '<h2>Related Videos</h2><ul>';
+            
             listItems.forEach(item => {
                 const videoId = item.id.videoId;
                 const videoTitle = item.snippet.title;
                 const channelTitle = item.snippet.channelTitle;
                 const description = item.snippet.description;
-                const publishedDate = item.snippet.publishedAt;
+                const timeElapsed = getTimeElapsedSinceUpload(new Date(item.snippet.publishedAt));
                 output += `
                 <div class="videoListContainer__videosarrange">
                     <div>
@@ -66,7 +89,7 @@ function execute() {
                 
                     <div>
                         <p id="video-title">${videoTitle}</p>
-                        <span>${publishedDate.substring(0, publishedDate.indexOf('T'))}</span>
+                        <span>${timeElapsed}</span>
                         <div id="channel-title">${channelTitle}</div>
                         <div id="video-description">${description}</div>
                     </div> 
