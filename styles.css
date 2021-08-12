@@ -28,6 +28,10 @@ iframe {
 }
 #video-description {
     margin-top: 0.7rem;
+    width: 80%;
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 #channel-title {
     font-style: italic;
@@ -66,6 +70,7 @@ iframe {
 }
 
 
+
 @media screen and (min-width: 751px) {
 
     .navBar {
@@ -97,7 +102,6 @@ iframe {
     }
     iframe {
         width: 20vw;
-        height: 20vh;
         margin-right: 0.7rem;
     }
     
@@ -108,20 +112,22 @@ iframe {
 
     #navBar__title {
         flex: 1;
+        visibility: hidden;
     }
     #navBar__searchBtn {
-        padding: 0 1rem;
+        width: 10%;
+        padding: 0 2rem;
         margin-right: 2rem;
     }
     #navBar__youtubeIcon {
+        width: 10%;
         margin-left: 1rem;
     }
     #navBar__keyword-input {
         border: none;
         padding: 0 1rem;
-        width: 55%;
+        width: 50%;
     }
-
 
     .videoListContainer__videosarrange {
         display: flex;
@@ -129,14 +135,11 @@ iframe {
     #videoListContainer {
         padding: 3rem 0 0 1rem;
     }
-    #video-description {
-        margin: 0.7rem 0;
-        overflow:hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+    #videoListContainer h2 {
+        margin-top: 10rem;
     }
     iframe {
-        height: 20vh;
+        height: 10vh;
         margin-right: 1rem;
     }
     
@@ -148,39 +151,34 @@ iframe {
         padding: 0.5rem 0;
     }
     #navBar__title {
-        flex: 1;
-        font-size:large;
-        margin-top: 0.1rem;
+        display: none;
     }
     #navBar__youtubeIcon {
-        width: 7%;
+        width: 15%;
         margin-left: 1rem;
     }
     #navBar__searchBtn {
-        padding: 0 0.4rem;
+        padding: 0 1rem;
         margin-right: 1rem;
     }
     #navBar__keyword-input {
+        margin-left: 2rem;
         border: none;
-        padding: 0;
+        padding: 5%;
     }
 
 
     #videoListContainer {
         padding: 3rem 0 0 1rem;
     }
+    #videoListContainer h2 {
+        margin-top: 3rem;
+    }
     iframe {
         width: 90vw;
-        height: 30vh;
+        height: 15vh;
         display: flex;
         flex-direction: column;
-    }
-    #video-description {
-        margin: 0.7rem 0;
-        width: 90%;
-        overflow:hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
     }
 
 }
