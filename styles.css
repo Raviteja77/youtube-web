@@ -176,7 +176,7 @@ iframe {
     }
     iframe {
         width: 90vw;
-        height: 15vh;
+        height: 30vh;
         display: flex;
         flex-direction: column;
     }
