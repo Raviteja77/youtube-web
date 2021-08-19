@@ -1,19 +1,9 @@
 
-
-gapi.load("client", loadClient);
-  
-function loadClient() {
-    gapi.client.setApiKey("AIzaSyAB92A3Iq6h1xlwsE9m_RiPBesMWQExEMI");
-    return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
-        .then(function() { console.log("GAPI client loaded for API"); },
-                function(err) { console.error("Error loading GAPI client for API", err); });
-}
-
-
+const API_KEY = "AIzaSyAsy8O_6WUv8paJ-5hNHxs79UrUsKYnilo";
 const keywordInput = document.getElementById('navBar__keyword-input');
 const videoList = document.getElementById('videoListContainer');
 const searchbtn = document.getElementById('navBar__searchBtn');
-var pageToken = '';
+let pageToken = '';
   
   
 function paginate(e, obj) {
@@ -51,63 +41,69 @@ function getTimeElapsedSinceUpload(date1) {
     return daysElapsed;
 }
 
-function execute() {
+
+async function execute() {
     const searchString = keywordInput.value;
-    if(searchString.length === 0) {
-      videoList.innerHTML = `<h1 id="errorMsg">Oops..!!! No results found</h1>`;
-      return;
-    }
-    var arr_search = {
-        "part": 'snippet',
-        "type": 'video',
-        "maxResults": 15,
-        "q": searchString
-    };
-  
-    if (pageToken != '') {
-        arr_search.pageToken = pageToken;
-    }
-  
-    return gapi.client.youtube.search.list(arr_search)
-    .then(function(response) {
-        
-        const listItems = response.result.items;
+    let output = '';
+    
+    try {
+      let searchLink = '';
+      if(pageToken != '') 
+        searchLink = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&type=video&part=snippet&maxResults=15&q=${searchString}&pageToken=${pageToken}`;
+      
+      else
+        searchLink = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&type=video&part=snippet&maxResults=15&q=${searchString}`
+        const searchData = await fetch(searchLink);
+
+      try {
+        const data = await searchData.json();
+
+        let listItems = data.items;
+        // console.log(data);
         if (listItems) {
-            let output = '<h2>Related Videos</h2><ul>';
-            
-            listItems.forEach(item => {
-                const videoId = item.id.videoId;
-                const videoTitle = item.snippet.title;
-                const channelTitle = item.snippet.channelTitle;
-                const description = item.snippet.description;
-                const timeElapsed = getTimeElapsedSinceUpload(new Date(item.snippet.publishedAt));
-                output += `
-                <div class="videoListContainer__videosarrange">
-                    <div>
-                        <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    </div>
-                
-                    <div>
-                        <p id="video-title">${videoTitle}</p>
-                        <span>${timeElapsed}</span>
-                        <div id="channel-title">${channelTitle}</div>
-                        <div id="video-description">${description}</div>
-                    </div> 
-                </div>  
-                `;
-            });
-            output += '</ul>';
-            if (response.result.prevPageToken) {
-                output += `<div class="pagination"><a class="paginate" href="#" data-id="${response.result.prevPageToken}" onclick="paginate(event, this)">Prev</a></div>`;
-            }
-  
-            if (response.result.nextPageToken) {
-                output += `<div class="pagination"><a href="#" class="paginate" data-id="${response.result.nextPageToken}" onclick="paginate(event, this)">Next</a></div>`;
-            }
-  
-         
-            videoList.innerHTML = output;
+           output += '<h2>Related Videos</h2><ul>';
+           listItems.forEach(item => {
+              const videoId = item.id.videoId;
+              const videoTitle = item.snippet.title;
+              const channelTitle = item.snippet.channelTitle;
+              const description = item.snippet.description;
+              const timeElapsed = getTimeElapsedSinceUpload(new Date(item.snippet.publishedAt));
+              
+              output += `
+              <div class="videoListContainer__videosarrange">
+                  <div>
+                      <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                  </div>
+                  <div>
+                      <p id="video-title">${videoTitle}</p>
+                      <span>${timeElapsed}</span>
+                      <div id="channel-title">${channelTitle}</div>
+                      <div id="video-description">${description}</div>
+                  </div> 
+              </div>  
+              `;
+          });
+          output += '</ul>';
         }
-    },
-    function(err) { console.error("Execute error", err); });
+
+        if (data.prevPageToken) {
+          output += `<div class="pagination"><a class="paginate" href="#" data-id="${data.prevPageToken}" onclick="paginate(event, this)">Prev</a></div>`;
+          // console.log("prev",data.prevPageToken);
+        }
+
+        if (data.nextPageToken) {
+          output += `<div class="pagination"><a href="#" class="paginate" data-id="${data.nextPageToken}" onclick="paginate(event, this)">Next</a></div>`;
+          data.prevPageToken = data.nextPageToken;
+          // console.log("next",data.nextPageToken);
+        }
+
+        videoList.innerHTML = output;
+      } catch(error) {
+        console.log(error);
+      }
+      
+    } catch(error) {
+      console.log(error);
+    }
+  
 }
